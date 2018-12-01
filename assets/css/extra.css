@@ -1,0 +1,31 @@
+.index-page {
+  background-color: #000 !important;
+}
+
+.square1 {
+  background: linear-gradient(0deg, #EE4894 0%, #47087F 100%) !important;
+}
+
+.square2 {
+  background: linear-gradient(0deg, #50C6E0 0%, #47087F 100%) !important;
+}
+
+.square3 {
+  background: linear-gradient(0deg, #EE4894 0%, #50C6E0 100%) !important;
+}
+
+.square4 {
+  background: linear-gradient(0deg, #47087F 0%, #EE4894 100%) !important;
+}
+
+.square5 {
+  background: linear-gradient(0deg, #50C6E0 0%, #EE4894 100%) !important;
+}
+
+.square6 {
+  background: linear-gradient(0deg, #50C6E0 0%, #EE4894 100%) !important;
+}
+
+.square7 {
+  background: linear-gradient(0deg, #50C6E0 0%, #EE4894 100%) !important;
+}

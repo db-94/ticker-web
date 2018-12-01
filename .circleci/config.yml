@@ -1,0 +1,53 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  validate-html:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:7.10
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: npm install html-validator
+      - run: node tests/html.js
+
+  validate-css:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:7.10
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: npm install csslint
+      - run: csslint assets/css/main.css
+
+  deploy:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:7.10
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: rm -rf .git .circleci .DS_Store README.md
+      - add_ssh_keys:
+          fingerprints:
+            - 1c:95:a5:5d:45:1f:d6:0a:0a:74:ac:77:00:10:9a:6c
+      - run: sudo apt-get update
+      - run: sudo apt install -y rsync
+      - run: ssh-keyscan -H home502473674.1and1-data.host >> ~/.ssh/known_hosts
+      - run: rsync -avz -e "ssh" ~/repo/ u75336870@home502473674.1and1-data.host:ticker/
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - validate-html
+      - deploy:
+          requires:
+            - validate-html
+          filters:
+            branches:
+              only: master
